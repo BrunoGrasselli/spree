@@ -17,6 +17,7 @@ class SeoAssist
       #ensures no trailing / for taxon and product urls
       query = build_query(params)
       new_location = env["PATH_INFO"][0...-1]
+      new_location = env["SCRIPT_NAME"] + new_location unless env["SCRIPT_NAME"].blank?
       new_location += '?' + query unless query.blank?
       return [301, { 'Location'=> new_location }, []]
     end
